@@ -19,11 +19,16 @@ def run():
     )""")
     con.commit()
 
-    cursor.execute("INSERT INTO users VALUES(?,?,?)",
-        (login, salt, password_hash)           
-    )
-    con.commit()
-    print("You have been registered!")
+    try:
+        cursor.execute("INSERT INTO users VALUES(?,?,?)",
+                (login, salt, password_hash)
+        )
+        con.commit()
+        print("You have been registered!")
+    except sqlite3.IntegrityError:
+        print("This login is already taken.")
+    finally:
+        con.close()
 
 if __name__ == "__main__":
     run()
