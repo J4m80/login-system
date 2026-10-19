@@ -14,7 +14,7 @@ def run():
     row = cursor.fetchone()
     con.close()
     if row is None:
-        print("User not found!")
+        print("Incorrect login or password.")
         return
 
     salt, stored_hash = row
@@ -29,7 +29,7 @@ def run():
     if input_hash == stored_hash:
         print("Welcome, " + login1 + "!")
     else:
-        print("Incorrect data!")
+        print("Incorrect login or password.")
 
 if __name__ == "__main__":
     run()
