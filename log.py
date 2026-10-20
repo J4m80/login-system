@@ -1,5 +1,6 @@
 import sqlite3
 import hashlib
+import hmac
 
 def run():
     login1 = input("Enter your login: ")
@@ -26,7 +27,7 @@ def run():
         100_000
     )
 
-    if input_hash == stored_hash:
+    if hmac.compare_digest(input_hash, stored_hash):
         print("Welcome, " + login1 + "!")
     else:
         print("Incorrect login or password.")
