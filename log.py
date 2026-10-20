@@ -1,7 +1,7 @@
 import sqlite3
-import hashlib
-import hmac
 import getpass
+
+from security import verify_password
 
 def run():
     login1 = input("Enter your login: ")
@@ -21,14 +21,7 @@ def run():
 
     salt, stored_hash = row
 
-    input_hash = hashlib.pbkdf2_hmac(
-        "sha256",
-        password1.encode(),
-        salt,
-        100_000
-    )
-
-    if hmac.compare_digest(input_hash, stored_hash):
+    if verify_password(password1, salt, stored_hash):
         print("Welcome, " + login1 + "!")
     else:
         print("Incorrect login or password.")
