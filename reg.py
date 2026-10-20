@@ -4,8 +4,13 @@ import sqlite3
 import getpass
 
 def run():
-    login = input("Write your login:")
-    password = getpass.getpass("Write your password:")
+    login = input("Write your login: ").strip()
+    password = getpass.getpass("Write your password: ")
+
+    if not login or password:
+        print("Login and password cannot be empty.")
+        return
+
 
     salt = os.urandom(16)
     password_hash = hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100_000)
