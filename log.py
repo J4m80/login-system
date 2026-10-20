@@ -1,10 +1,11 @@
 import sqlite3
 import hashlib
 import hmac
+import getpass
 
 def run():
     login1 = input("Enter your login: ")
-    password1 = input("Enter your password: ")
+    password1 = getpass.getpass("Enter your password: ")
 
     con = sqlite3.connect("users.db")
     cursor = con.cursor()

@@ -1,10 +1,11 @@
 import hashlib
 import os
 import sqlite3
+import getpass
 
 def run():
     login = input("Write your login:")
-    password = input("Write your password:")
+    password = getpass.getpass("Write your password:")
 
     salt = os.urandom(16)
     password_hash = hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100_000)
